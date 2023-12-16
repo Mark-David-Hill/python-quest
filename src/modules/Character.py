@@ -1,6 +1,6 @@
 class Character:
   def __init__(self, sql_character):
-    self.character.id = sql_character.character_id
+    self.id = sql_character.character_id
     self.name = sql_character.name
     self.level = sql_character.level
     self.exp = sql_character.exp
@@ -11,6 +11,31 @@ class Character:
     self.shield_id = sql_character.shield_id
     self.accessory_id = sql_character.accessory_id
     self.inventory_str = sql_character.inventory
+    self.growth_sum = self.get_growth_sum(self.name)
+    self.growth_type = self.get_growth_type(self.growth_sum)
+    self.str = self.get_strength()
+    self.agi = self.get_agility()
+    self.max_hp = self.get_max_hp()
+    self.max_mp = self.get_max_mp()
+
+  def print_self(self):
+    print(f'ID: {self.id}')
+    print(f'Name: {self.name}')
+    print(f'Level: {self.name}')
+    print(f'EXP: {self.exp}')
+    print(f'HP: {self.hp}')
+    print(f'MP: {self.mp}')
+    print(f'Weapon ID: {self.weapon_id}')
+    print(f'Armor ID: {self.armor_id}')
+    print(f'Shield ID: {self.shield_id}')
+    print(f'Accessory ID: {self.accessory_id}')
+    print(f'Inventory STR: {self.inventory_str}')
+    print(f'Growth Sum: {self.growth_sum}')
+    print(f'Growth Type: {self.growth_type}')
+    print(f'STR: {self.str}')
+    print(f'AGI: {self.agi}')
+    print(f'Max HP: {self.max_hp}')
+    print(f'Max MP: {self.max_mp}')
 
   def get_growth_sum(self, name):
     letter_values = [
@@ -46,11 +71,25 @@ class Character:
     growth_type = growth_sum % 4
     return growth_type
 
-  def get_base_stats(self):
+  def get_strength(self):
     strength_stats_by_level = [0, 4, 5, 7, 7, 12, 16, 18, 22, 30, 35, 40, 48, 52, 60, 68, 72, 72, 85, 87, 92, 95, 97, 99, 103, 113, 117, 125, 130, 135, 140]
+    base_str = strength_stats_by_level[self.level]
+    return base_str
+  
+  def get_agility(self):
     agility_stats_by_level = [0, 4, 4, 6, 8, 10, 10, 17, 20, 22, 31, 35, 40, 48, 55, 64, 70, 78, 84, 86, 88, 90, 90, 94, 98, 100, 105, 107, 115, 120, 130]
+    base_agi = agility_stats_by_level[self.level]
+    return base_agi
+
+  def get_max_hp(self):
     max_hp_by_level = [0, 15, 22, 24, 31, 35, 38, 40, 46, 50, 54, 62, 63, 70, 78, 86, 92, 100, 115, 130, 138, 149, 158, 165, 170, 174, 180, 189, 195, 200, 210]
+    base_max_hp = max_hp_by_level[self.level]
+    return base_max_hp
+  
+  def get_max_mp(self):
     max_mp_by_level = [0, 0, 0, 5, 16, 20, 24, 26, 29, 36, 40, 50, 58, 64, 70, 72, 95, 100, 108, 115, 128, 135, 146, 153, 161, 161, 168, 175, 180, 190, 200]
+    base_max_mp = max_mp_by_level[self.level]
+    return base_max_mp
 
 
 # character = Character()
