@@ -14,3 +14,6 @@ characters = [Character(sql_characters[0]), Character(sql_characters[1])]
 characters[0].print_self()
 print('\n')
 characters[1].print_self()
+
+character_data_mark = get_characters(cursor, 'jk')
+print(character_data_mark)
