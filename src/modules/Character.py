@@ -7,7 +7,7 @@ class Character:
     self.hp = sql_character.hp
     self.mp = sql_character.mp
     self.weapon_id = sql_character.weapon_id
-    self.armor_id = sql_character.weapon_id
+    self.armor_id = sql_character.armor_id
     self.shield_id = sql_character.shield_id
     self.accessory_id = sql_character.accessory_id
     self.inventory_str = sql_character.inventory

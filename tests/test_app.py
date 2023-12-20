@@ -2,6 +2,7 @@
 from src.modules.Character import Character
 import pytest
 import sqlite3
+from src.modules.SQL_Character import SQL_Character
 from src.modules.Character import Character
 from src.modules.database_manager import *
 from src.modules.SQL_Character import SQL_Character
@@ -21,6 +22,7 @@ def cursor(tmpdir):
   yield connection
   connection.close()
 
+
 def test_get_characters_by_id(cursor):
   character_data = get_characters(cursor, 2)
   assert character_data[1] == 'Mark'
@@ -36,6 +38,28 @@ def test_get_character_by_wrong_id_returns_none(cursor):
 def test_get_character_by_string_returns_none(cursor):
   character_data = get_characters(cursor, 'monkey')
   assert character_data is None
+
+def test_create_sql_character_works():
+  sql_data = (1, 'Erdrick', 20, 0, None, None, 1, 1, 1, 1, None)
+  sql_erdrick = SQL_Character(sql_data)
+  assert sql_erdrick.character_id == 1 and sql_erdrick.name == 'Erdrick' and sql_erdrick.level == 20 and sql_erdrick.exp == 0 and sql_erdrick.weapon_id == 1 and sql_erdrick.armor_id == 1 and sql_erdrick.shield_id == 1 and sql_erdrick.accessory_id == 1
+
+def test_create_sql_character_from_database_works(cursor):
+  sql_data = get_characters(cursor, 2)
+  sql_mark = SQL_Character(sql_data)
+  assert sql_mark.character_id == 2 and sql_mark.name == 'Mark' and sql_mark.level == 5 and sql_mark.exp == 0 and sql_mark.weapon_id == 1 and sql_mark.armor_id == 1 and sql_mark.shield_id == 1 and sql_mark.accessory_id == 1
+
+def test_create_character():
+  sql_data = (1, 'Erdrick', 20, 15, 35, 25, 8, 9, 10, 11, '6, 2, 5, 8')
+  sql_erdrick = SQL_Character(sql_data)
+  erdrick = Character(sql_erdrick)
+  assert erdrick.id == 1 and erdrick.name == 'Erdrick' and erdrick.level == 20 and erdrick.exp == 15 and erdrick.hp == 35 and erdrick.mp == 25 and erdrick.weapon_id == 8 and erdrick.armor_id == 9 and erdrick.shield_id == 10 and erdrick.accessory_id == 11 and erdrick.inventory_str == '6, 2, 5, 8'
+
+def test_create_character_from_database_works(cursor):
+  sql_data = get_characters(cursor, 2)
+  sql_mark = SQL_Character(sql_data)
+  mark = Character(sql_mark)
+  assert mark.id == 2 and mark.name == 'Mark'
 
 # def test_get_growth_type_returns_expected_1():
 #   character = Character()

@@ -19,3 +19,13 @@ def get_characters(cursor, character_id = -1):
     
   except Exception as e:
     print(f'\n- ERROR: {e}. Could not get Character data.')
+
+def create_character(connection, name, level, exp, hp, mp, weapon_id, armor_id, shield_id, accessory_id, inventory):
+  insert_sql = 'INSERT INTO Characters (name, level, exp, hp, mp, weapon_id, armor_id, shield_id, accessory_id, inventory) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'
+  try:
+    cursor = connection.cursor()
+    cursor.execute(insert_sql, (name, level, exp, hp, mp, weapon_id, armor_id, shield_id, accessory_id, inventory))
+    connection.commit()
+    print(f'\nSUCCESS: Character "{name}" Successfully created!')
+  except Exception as e:
+    print(f'\n- ERROR: {e}. Character was not created.')
