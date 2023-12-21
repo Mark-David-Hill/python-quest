@@ -12,6 +12,7 @@ class SQL_Character:
     self.shield_id = sql_data[8]
     self.accessory_id = sql_data[9]
     self.inventory = sql_data[10]
+    self.date_saved = sql_data[11]
 
   def print_self(self):
     print(f'Character ID: {self.character_id}')
@@ -25,3 +26,4 @@ class SQL_Character:
     print(f'Shield ID: {self.shield_id}')
     print(f'Accessory ID: {self.accessory_id}')
     print(f'Inventory: {self.inventory}')
+    print(f'Date Saved: {self.date_saved}')

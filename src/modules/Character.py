@@ -11,6 +11,7 @@ class Character:
     self.shield_id = sql_character.shield_id
     self.accessory_id = sql_character.accessory_id
     self.inventory_str = sql_character.inventory
+    self.date_saved = sql_character.date_saved
     self.growth_sum = self.get_growth_sum(self.name)
     self.growth_type = self.get_growth_type(self.growth_sum)
     self.growth_quotient = self.growth_sum // 4
@@ -32,6 +33,7 @@ class Character:
     print(f'Shield ID: {self.shield_id}')
     print(f'Accessory ID: {self.accessory_id}')
     print(f'Inventory STR: {self.inventory_str}')
+    print(f'Date Saved: {self.date_saved}')
     print(f'Growth Sum: {self.growth_sum}')
     print(f'Growth Type: {self.growth_type}')
     print(f'STR: {self.str}')
@@ -109,8 +111,3 @@ class Character:
     else:
       base_max_mp = max_mp_by_level[self.level]
       return base_max_mp
-
-
-# character = Character()
-# growth_type = character.get_growth_type('Erdrick')
-# print(growth_type)
