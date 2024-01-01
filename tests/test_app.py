@@ -1,9 +1,9 @@
 # To test: PYTHONPATH=src python3 -m pytest
-from src.modules.Character import Character
+from modules.characters import Character
 import pytest
 import sqlite3
 from src.modules.SQL_Character import SQL_Character
-from src.modules.Character import Character
+from modules.characters import Character
 from src.modules.database_manager import *
 from src.modules.SQL_Character import SQL_Character
 from src.modules.get_date_time_str import get_date_time_str

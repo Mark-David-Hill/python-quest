@@ -1,4 +1,9 @@
-from modules.Character import Character
+# from modules.Character import Character
+# from modules.Hero import Hero
+# from modules.Enemy import Enemy
+# from modules.character_classes import *
+# from modules.Hero import Hero
+from modules.characters import *
 from modules.database_manager import *
 from modules.SQL_Character import SQL_Character
 from modules.get_date_time_str import get_date_time_str
@@ -23,7 +28,7 @@ cursor = connection.cursor()
 # def test_get_characters_by_id(cursor):
 # character_data = get_characters(cursor, 2)
 # print(character_data)
-import random
+# import random
 
 # name = str(random.randint(0, 100000))
 # level = str(random.randint(0, 30))
@@ -41,3 +46,10 @@ import random
 # all_characters = get_characters(cursor)
 # test_character = all_characters[-1]
 # print(all_characters)
+
+sql_data = get_characters(cursor, 1)
+sql_mark = SQL_Character(sql_data)
+# sql_mark.print_self()
+Mark = Hero(sql_mark)
+
+Mark.print_self()
