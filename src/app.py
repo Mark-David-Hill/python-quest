@@ -5,7 +5,6 @@
 # from modules.Hero import Hero
 from modules.characters import *
 from modules.database_manager import *
-from modules.SQL_Character import SQL_Character
 from modules.get_date_time_str import get_date_time_str
 import sqlite3
 connection = sqlite3.connect('src/python_quest.db')
@@ -47,9 +46,16 @@ cursor = connection.cursor()
 # test_character = all_characters[-1]
 # print(all_characters)
 
-sql_data = get_characters(cursor, 1)
-sql_mark = SQL_Character(sql_data)
-# sql_mark.print_self()
-Mark = Hero(sql_mark)
+# sql_data = get_characters(cursor, 1)
+# sql_mark = SQL_Character(sql_data)
+# # sql_mark.print_self()
+# Mark = Hero(sql_mark)
 
-Mark.print_self()
+# Mark.print_self()
+
+
+sql_data = get_enemies(cursor, 1)
+sql_slime = SQL_Enemy(sql_data)
+# sql_slime.print_self()
+slime = Enemy(sql_slime)
+slime.print_self()

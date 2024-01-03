@@ -1,6 +1,6 @@
 # implement active variable into tests/other classes
-# Implement Level Up Check/Level Up
 # Implement Saving Character to DB
+# https://gamefaqs.gamespot.com/nes/563408-dragon-warrior/faqs/69121
 
 class Character:
   def __init__(self):
@@ -29,6 +29,8 @@ class Character:
     else:
       return False
     
+
+
 
 
 
@@ -146,13 +148,19 @@ class Hero(Character):
       base_max_mp = max_mp_by_level[self.level]
       return base_max_mp
     
+  def check_for_level_up(self):
+    pass
+
+  def level_up(self):
+    pass
+    
 
 
 
 
 class Enemy(Character):
   def __init__(self, sql_enemy):
-    self.id = sql_enemy.sql_enemy.character_id
+    self.id = sql_enemy.enemy_id
     self.name = sql_enemy.name
     self.max_hp = sql_enemy.max_hp
     self.max_mp = sql_enemy.max_mp
@@ -168,3 +176,86 @@ class Enemy(Character):
     print(f'AGI: {self.agi}')
     print(f'Max HP: {self.max_hp}')
     print(f'Max MP: {self.max_mp}')
+
+
+
+
+
+
+
+
+
+class SQL_Character:
+  def __init__(self, sql_data):
+    self.sql_data = sql_data
+    self.character_id = sql_data[0]
+    self.name = sql_data[1]
+    self.level = sql_data[2]
+    self.exp = sql_data[3]
+    self.hp = sql_data[4]
+    self.mp = sql_data[5]
+    self.weapon_id = sql_data[6]
+    self.armor_id = sql_data[7]
+    self.shield_id = sql_data[8]
+    self.accessory_id = sql_data[9]
+    self.inventory = sql_data[10]
+    self.date_saved = sql_data[11]
+
+  def print_self(self):
+    print(f'Character ID: {self.character_id}')
+    print(f'Name: {self.name}')
+    print(f'Level: {self.level}')
+    print(f'EXP: {self.exp}')
+    print(f'HP: {self.hp}')
+    print(f'MP: {self.mp}')
+    print(f'Weapon ID: {self.weapon_id}')
+    print(f'Armor ID: {self.armor_id}')
+    print(f'Shield ID: {self.shield_id}')
+    print(f'Accessory ID: {self.accessory_id}')
+    print(f'Inventory: {self.inventory}')
+    print(f'Date Saved: {self.date_saved}')
+
+
+class SQL_Enemy:
+  def __init__(self, sql_data):
+    self.sql_data = sql_data
+    self.enemy_id = sql_data[0]
+    self.name = sql_data[1]
+    self.dw_name = sql_data[2]
+    self.str = sql_data[3]
+    self.agi = sql_data[4]
+    self.max_hp = sql_data[5]
+    self.max_mp = sql_data[6]
+    self.exp = sql_data[7]
+    self.gold = sql_data[8]
+    self.spell_1_id = sql_data[9]
+    self.spell_1_chance = sql_data[10]
+    self.spell_2_id = sql_data[11]
+    self.spell_2_chance = sql_data[12]
+    self.spell_3_id = sql_data[13]
+    self.spell_3_chance = sql_data[14]
+    self.sleep_resist = sql_data[15]
+    self.stopspell_resist = sql_data[16]
+    self.hurt_resist = sql_data[17]
+    self.evasion = sql_data[18]
+
+  def print_self(self):
+    print(f'Enemy ID: {self.enemy_id}')
+    print(f'Name: {self.name}')
+    print(f'DW Name: {self.dw_name}')
+    print(f'STR: {self.str}')
+    print(f'AGI: {self.agi}')
+    print(f'Max HP: {self.max_hp}')
+    print(f'Max MP: {self.max_mp}')
+    print(f'EXP: {self.exp}')
+    print(f'Gold: {self.gold}')
+    print(f'Sleep Resist: {self.sleep_resist}')
+    print(f'Stopspell Resist: {self.stopspell_resist}')
+    print(f'Hurt Resist: {self.hurt_resist}')
+    print(f'Evasion: {self.evasion}')
+    print(f'Spell 1 ID: {self.spell_1_id}')
+    print(f'Spell 1 Chance: {self.spell_1_chance}')
+    print(f'Spell 2 ID: {self.spell_2_id}')
+    print(f'Spell 2 Chance: {self.spell_2_chance}')
+    print(f'Spell 3 ID: {self.spell_3_id}')
+    print(f'Spell 3 Chance: {self.spell_3_chance}')
