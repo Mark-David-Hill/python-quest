@@ -168,6 +168,8 @@ class Enemy(Character):
     self.agi = sql_enemy.agi
     self.max_hp = sql_enemy.max_hp
     self.max_mp = sql_enemy.max_hp
+    self.hp = self.max_hp
+    self.evasion = sql_enemy.evasion
 
   def print_self(self):
     print(f'ID: {self.id}')

@@ -2,10 +2,12 @@
 # from modules.Hero import Hero
 # from modules.Enemy import Enemy
 # from modules.character_classes import *
-# from modules.Hero import Hero
+# from modules.Hero import Hero\
+import random
 from modules.characters import *
 from modules.database_manager import *
 from modules.get_date_time_str import get_date_time_str
+from modules.battle_manager import Battle_Manager
 import sqlite3
 connection = sqlite3.connect('src/python_quest.db')
 cursor = connection.cursor()
@@ -58,4 +60,19 @@ sql_data = get_enemies(cursor, 1)
 sql_slime = SQL_Enemy(sql_data)
 # sql_slime.print_self()
 slime = Enemy(sql_slime)
-slime.print_self()
+# slime.print_self()
+
+sql_hero_data = get_characters(cursor, 1)
+sql_hero = SQL_Character(sql_hero_data)
+hero = Hero(sql_hero)
+# hero.print_self()
+
+bm = Battle_Manager(hero, slime, random)
+
+# print('\n\n')
+
+for i in range(200):
+  bm.attack_enemy()
+# bm.attack_hero()
+
+# print(random.random())
