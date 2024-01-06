@@ -9,6 +9,7 @@ from modules.database_manager import *
 from modules.get_date_time_str import get_date_time_str
 from modules.battle_manager import Battle_Manager
 import sqlite3
+import ansi_lib as al
 connection = sqlite3.connect('src/python_quest.db')
 cursor = connection.cursor()
 
@@ -55,6 +56,72 @@ cursor = connection.cursor()
 
 # Mark.print_self()
 
+battle_screen_layout = """
+ _____________________    ___________________________________________________________
+|                     |  |                                                           |
+|                     |  |                                                           |
+ _____________________   |                                                           |
+ _____________________   |                                                           |
+|                     |  |                                                           |
+|    HP:              |  |                                                           |
+|    MP:              |  |                                                           |
+|    Level:           |  |                                                           |
+ _____________________   |                                                           |
+                         |                                                           |
+ _____________________   |                                                           |
+|                     |  |                                                           |
+|   1. Attack         |  |                                                           |
+|   2. Spells         |  |                                                           |
+|   3. Flee           |  |                                                           |
+|   4. Items          |  |                                                           |
+|                     |  |                                                           |
+ _____________________    ___________________________________________________________
+ ____________________________________________________________________________________
+|                                                                                    |
+|                                                                                    |
+|                                                                                    |
+|                                                                                    |
+|                                                                                    |
+ ____________________________________________________________________________________
+"""
+
+slime_art = """
+______________█_____________
+______________█_____________
+_____________███____________
+__________███▒▒▒███_________
+_______███▒▒▒▒▒▒▒▒▒███______
+___████▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒████__
+██▒▒▒▒▒▒▒▒██▒▒▒▒██▒▒▒▒▒▒▒▒██
+██▒▒▒▒▒▒▒▒██▒▒▒▒██▒▒▒▒▒▒▒▒██
+██▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒██
+██▒▒▒▒▒██▒▒▒▒▒▒▒▒▒▒██▒▒▒▒▒██
+██▓▓▒▒▒▒▒██████████▒▒▒▒▒▓▓██
+__██▓▓▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▓▓▓██__
+____████████████████████____
+"""
+
+slime_art_list = [
+'______________█_____________',
+'______________█_____________',
+'_____________███____________',
+'__________███▒▒▒███_________',
+'_______███▒▒▒▒▒▒▒▒▒███______',
+'___████▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒████__',
+'██▒▒▒▒▒▒▒▒██▒▒▒▒██▒▒▒▒▒▒▒▒██',
+'██▒▒▒▒▒▒▒▒██▒▒▒▒██▒▒▒▒▒▒▒▒██',
+'██▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒██',
+'██▒▒▒▒▒██▒▒▒▒▒▒▒▒▒▒██▒▒▒▒▒██',
+'██▓▓▒▒▒▒▒██████████▒▒▒▒▒▓▓██',
+'__██▓▓▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▓▓▓██__',
+'____████████████████████____'
+]
+
+# al.set_font(al.fg.blue, al.bg.black, al.text.bold)
+al.clear()
+al.set_font(al.fg.white, al.bg.black)
+
+# print(battle_screen_layout)
 
 sql_data = get_enemies(cursor, 1)
 sql_slime = SQL_Enemy(sql_data)
@@ -67,12 +134,31 @@ sql_hero = SQL_Character(sql_hero_data)
 hero = Hero(sql_hero)
 # hero.print_self()
 
-bm = Battle_Manager(hero, slime, random)
+bm = Battle_Manager(hero, slime, random, al)
+
+bm.display_battle_menu()
 
 # print('\n\n')
 
-for i in range(200):
-  bm.attack_enemy()
+# for i in range(200):
+# bm.attack_enemy()
 # bm.attack_hero()
 
 # print(random.random())
+
+# al.move_cursor(24, 'u')
+# # al.move_cursor(25, 'r')
+
+# al.set_font(al.fg.blue, al.bg.black)
+# for line in slime_art_list:
+#   al.set_col(41)
+#   al.writeln(line)
+#   al.next_line()
+
+# for i in range(10):
+#   al.next_line()
+# # print(slime_art)
+  
+# al.set_font(al.fg.white, al.bg.black)
+  
+# input('Please type the number corresponding to your desired action: ')
