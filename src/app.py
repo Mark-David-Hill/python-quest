@@ -146,8 +146,8 @@ bm.display_battle_menu()
 
 # print(random.random())
 
-al.move_cursor(21, 'u')
-al.set_col(13)
+al.move_cursor(25, 'u')
+al.set_col(5)
 # al.move_cursor(25, 'r')
 
 al.set_font(al.fg.blue, al.bg.black)

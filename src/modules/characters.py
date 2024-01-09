@@ -56,6 +56,10 @@ class Hero(Character):
     self.agi = self.get_agility()
     self.max_hp = self.get_max_hp()
     self.max_mp = self.get_max_mp()
+    if self.hp is None:
+      self.hp = self.max_hp
+    if self.mp is None:
+      self.mp = self.max_mp
 
   def print_self(self):
     print(f'ID: {self.id}')

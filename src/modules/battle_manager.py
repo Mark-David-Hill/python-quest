@@ -4,6 +4,12 @@ class Battle_Manager:
     self.enemy = enemy
     self.random = random
     self.al = ansi_lib
+    self.menu_height = 26
+    self.hero_name_origin = [5, 25]
+    self.hero_hp_origin = [13, 21]
+    self.mp_origin = [13, 20]
+    self.level_origin = [13, 19]
+    self.enemy.origin = [27, 26]
 
   def battle_start(self):
     pass
@@ -47,7 +53,18 @@ class Battle_Manager:
   def attempt_to_flee(self):
     pass
 
+  def get_remaining_lines(self, vertical_position):
+    lines_difference = self.menu_height - vertical_position
+    remaining_lines = self.menu_height - lines_difference
+    return remaining_lines
   
+  def display(self, text_to_display, origin):
+    self.al.move_cursor(origin[1], 'u')
+    self.al.set_col(origin[0]) 
+    self.al.writeln(text_to_display)
+    remaining_lines = self.get_remaining_lines(origin[1])
+    for _ in range(remaining_lines):
+      self.al.next_line()
 
   def display_battle_menu(self):
     battle_screen_layout = """
@@ -79,6 +96,7 @@ class Battle_Manager:
  ____________________________________________________________________________________
 """
     print(battle_screen_layout)
-
-enemy_origin = [27, 26]
-hp_origin = [13, 21]
+    self.display(self.hero.name, self.hero_name_origin)
+    self.display(self.hero.hp, self.hero_hp_origin)
+    self.display(self.hero.mp, self.mp_origin)
+    self.display(self.hero.level, self.level_origin)
