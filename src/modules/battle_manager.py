@@ -80,3 +80,5 @@ class Battle_Manager:
 """
     print(battle_screen_layout)
 
+enemy_origin = [27, 26]
+hp_origin = [13, 21]

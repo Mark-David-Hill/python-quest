@@ -146,19 +146,25 @@ bm.display_battle_menu()
 
 # print(random.random())
 
-# al.move_cursor(24, 'u')
-# # al.move_cursor(25, 'r')
+al.move_cursor(21, 'u')
+al.set_col(13)
+# al.move_cursor(25, 'r')
 
-# al.set_font(al.fg.blue, al.bg.black)
+al.set_font(al.fg.blue, al.bg.black)
+
 # for line in slime_art_list:
-#   al.set_col(41)
+#   al.set_col(27)
 #   al.writeln(line)
 #   al.next_line()
 
-# for i in range(10):
-#   al.next_line()
-# # print(slime_art)
+al.writeln('Test')
+for i in range(10):
+  al.next_line()
+
+for i in range():
+  al.next_line()
+# print(slime_art)
   
-# al.set_font(al.fg.white, al.bg.black)
+al.set_font(al.fg.white, al.bg.black)
   
 # input('Please type the number corresponding to your desired action: ')
