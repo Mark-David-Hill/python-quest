@@ -1,9 +1,10 @@
 class Battle_Manager:
-  def __init__(self, hero, enemy, random, ansi_lib) -> None:
+  def __init__(self, hero, enemy, random, ansi_lib, album) -> None:
     self.hero = hero
     self.enemy = enemy
     self.random = random
     self.al = ansi_lib
+    self.album = album
     self.menu_height = 26
     self.hero_name_origin = [5, 25]
     self.hero_hp_origin = [13, 21]
@@ -58,45 +59,25 @@ class Battle_Manager:
     remaining_lines = self.menu_height - lines_difference
     return remaining_lines
   
-  def display(self, text_to_display, origin):
-    self.al.move_cursor(origin[1], 'u')
-    self.al.set_col(origin[0]) 
+  def display(self, text_to_display, origin, offset):
+    x_origin = origin[0] + offset[0]
+    y_origin = origin[1] + offset[1]
+    self.al.set_col(x_origin) 
+    self.al.move_cursor(y_origin, 'u')
     self.al.writeln(text_to_display)
     remaining_lines = self.get_remaining_lines(origin[1])
     for _ in range(remaining_lines):
       self.al.next_line()
 
   def display_battle_menu(self):
-    battle_screen_layout = """
- _____________________    ___________________________________________________________
-|                     |  |                                                           |
-|                     |  |                                                           |
- _____________________   |                                                           |
- _____________________   |                                                           |
-|                     |  |                                                           |
-|    HP:              |  |                                                           |
-|    MP:              |  |                                                           |
-|    Level:           |  |                                                           |
- _____________________   |                                                           |
-                         |                                                           |
- _____________________   |                                                           |
-|                     |  |                                                           |
-|   1. Attack         |  |                                                           |
-|   2. Spells         |  |                                                           |
-|   3. Flee           |  |                                                           |
-|   4. Items          |  |                                                           |
-|                     |  |                                                           |
- _____________________    ___________________________________________________________
- ____________________________________________________________________________________
-|                                                                                    |
-|                                                                                    |
-|                                                                                    |
-|                                                                                    |
-|                                                                                    |
- ____________________________________________________________________________________
-"""
-    print(battle_screen_layout)
-    self.display(self.hero.name, self.hero_name_origin)
-    self.display(self.hero.hp, self.hero_hp_origin)
-    self.display(self.hero.mp, self.mp_origin)
-    self.display(self.hero.level, self.level_origin)
+    print(self.album.battle_screen_layout)
+    name = self.hero.name
+    hp = self.hero.hp
+    mp = self.hero.mp
+    level = self.hero.level
+    lengths = [len(str(hp)), len(str(mp)), len(str(level))]
+    digits = [(3 - lengths[0]), (3 - lengths[1]), (3 - lengths[2])]
+    self.display(self.hero.name, self.hero_name_origin, [0, 0])
+    self.display(self.hero.hp, self.hero_hp_origin, [digits[0], 0])
+    self.display(self.hero.mp, self.mp_origin, [digits[1], 0])
+    self.display(self.hero.level, self.level_origin, [digits[2], 0])
